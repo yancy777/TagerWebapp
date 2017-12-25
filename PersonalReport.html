@@ -1,0 +1,569 @@
+<!--
+	作者：Yancy
+	时间：2017-11-22
+	描述：
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>个人报告</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link href="https://cdn.bootcss.com/Swiper/4.0.1/css/swiper.css" rel="stylesheet">
+		<script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+		<script src="https://cdn.bootcss.com/Swiper/4.0.1/js/swiper.js"></script>
+		<script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+		<script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+		<style>
+			html,
+			body {
+				position: relative;
+				height: 100%;
+			}
+			
+			body {
+				background: #eee;
+				font-family: "微软雅黑";
+				font-family: "Microsoft YaHei";
+				color: #000;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.swiper-container {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.swiper-slide {
+				text-align: center;
+				background: #fff;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+			}
+			
+			.home {
+				background: url(images/home-bg.png) no-repeat center;
+				background-size: cover;
+				color: #FFFFFF;
+			}
+			
+			.home .logo {
+				height: 0.5rem;
+				display: block;
+				margin: 0 auto;
+			}
+			
+			.home-box {
+				/*width: 3.5rem;*/
+				/*height: 7.8rem;*/
+				/*position: absolute;
+				top: 1rem;*/
+			}
+			
+			.home-title {
+				margin-bottom: 1.24rem;
+			}
+			
+			.home-title h3 {
+				font-size: 0.36rem;
+				margin-top: 1rem;
+				margin-bottom: 0.4rem;
+			}
+			
+			.home-title span {
+				font-size: 0.24rem;
+				display: block;
+			}
+			
+			.info-img {
+				height: 1.8rem;
+				width: 1.8rem;
+				border: 0.15rem solid #e88871;
+				border-radius: 50%;
+				background-size: cover;
+				margin: 0 auto;
+			}
+			
+			.info-img img {
+				height: 1.7rem;
+				width: 1.7rem;
+				border-radius: 50%;
+				border: 0.05rem solid #FFFFFF;
+			}
+			
+			.info-box span {
+				font-size: 0.3rem;
+			}
+			
+			.info-box .info-text {
+				line-height: 0.7rem;
+			}
+			
+			.info-text .gender-icon {
+				height: 0.5rem;
+				margin-top: 0.1rem;
+			}
+			
+			.info-text-age {
+				height: 0.5rem;
+				width: 2rem;
+				margin: 0 auto;
+			}
+			
+			.info-text-age span {
+				float: left;
+				width: 0.5rem;
+			}
+			
+			.info-text-age img {
+				float: left;
+				margin-left: 0.5rem;
+			}
+			
+			.foot-up {
+				font-size: 0.18rem;
+				margin-top: 2.5rem;
+			}
+			
+			.foot-up img {
+				height: 0.3rem;
+			}
+			/* 上肢力量*/
+			
+			.upper-body-strength-box {
+				width: 100%;
+			}
+			
+			.upper-top {
+				height: 5.4rem;
+			}
+			
+			.upper-score-bar {
+				height: 2.7rem;
+			}
+			
+			.upper-analysis {
+				height: 2.7rem;
+			}
+			
+			.bg-border {
+				width: 100%;
+				height: 0.2rem;
+				background: #EEEEEE;
+			}
+			
+			.top-box h3 {
+				font-size: 0.36rem;
+				padding-top: 0.4rem;
+			}
+			
+			.top-box img {
+				width: 3rem;
+			}
+			
+			.top-box img {
+				width: 3rem;
+				padding: 0.6rem 0;
+			}
+			
+			.top-box .top-result-box {
+				width: 6rem;
+				margin: 0 auto;
+			}
+			
+			.top-result {
+				height: 1.2rem;
+				width: 2rem;
+				line-height: 0.1rem;
+				float: left;
+				text-align: center;
+			}
+			
+			.top-result p {
+				font-size: 0.24rem;
+			}
+			
+			.top-result strong {
+				font-size: 0.36rem;
+			}
+			
+			.top-result span {
+				color: #da2337;
+				font-size: 0.36rem;
+			}
+			
+			.score-bar-title-box {
+				width: 6.4rem;
+				height: 0.7rem;
+				border-bottom: 1px solid #bfbfbf;
+				margin: 0 auto;
+			}
+			
+			.score-bar-title {
+				height: 0.4rem;
+				border-left: 0.1rem solid #000000;
+				font-size: 0.3rem;
+				text-align: left;
+				padding-left: 0.3rem;
+			}
+			
+			.bar-title {
+				width: 6rem;
+				height: 1rem;
+				background: url(images/bar-bg.png) no-repeat bottom center;
+				background-size: contain;
+				margin: 0 auto;
+			}
+			
+			.bar-title p {
+				width: 2.8rem;
+				font-size: 0.36rem;
+				float: left;
+				line-height: 0.15rem;
+			}
+			
+			.score-bar {
+				width: 6rem;
+				height: 0.5rem;
+				margin: 0 auto;
+				padding-top: 0.2rem;
+			}
+			
+			.score-bar-bar {
+				height: 0.3rem;
+				background: #DA2337;
+				float: left;
+				margin-top: 0.07rem;
+			}
+			
+			.score-bar span {
+				font-size: 0.3rem;
+				float: left;
+			}
+			
+			.score-bar-box {
+				width: 6rem;
+				margin: 0 auto;
+			}
+			/*我的成就*/
+			
+			.achievement-box {
+				height: 11rem;
+			}
+			
+			.achievement-item {
+				margin-top: 0.3rem;
+				height: 2rem;
+			}
+			
+			.achievement-item img {
+				width: 2.2rem;
+				float: left;
+			}
+			
+			.achievement-item div {
+				width: 3rem;
+				float: left;
+				text-align: left;
+				line-height: 0.35rem;
+				padding-left: 0.5rem;
+			}
+			
+			.achievement-item h3 {
+				font-size: 0.36rem;
+				margin: 0.1rem 0;
+			}
+			
+			.achievement-item strong,
+			.achievement-item p,
+			.achievement-Succes p {
+				font-size: 0.3rem;
+			}
+			
+			.achievement-Succes strong {
+				font-size: 0.36rem;
+			}
+			
+			.achievement-item span,
+			.achievement-Succes span {
+				color: #DA2337
+			}
+			
+			.achievement-Succes-img {
+				padding-top: 2rem;
+			}
+		</style>
+	</head>
+	<script type="text/x-handlebars-template" id="content-html">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide home">
+					<div class="home-box">
+						<img class="logo" src="images/logo.png" />
+						<div class="home-title">
+							<h3>睿莱体质测试报告</h3>
+							<span>
+							2017年10月12日完成测试
+							</span>
+						</div>
+						<div class="info-box">
+							<div class="info-img">
+								<img src="images/photo.png">
+							</div>
+							<div class="info-text">
+								<span>睿小莱</span>
+								<div class="info-text-age">
+									<span>5岁</span>
+									<img class="gender-icon" src="images/girl-icon.png" />
+									<span>女</span>
+								</div>
+							</div>
+						</div>
+						<div class="foot-up">
+							<img src="images/foot-up.png" />
+							<h3>上拉查看具体情况</h3>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide upper-body-strength">
+					<div class="upper-body-strength-box">
+						<div class="upper-top">
+							<div class="top-box">
+								<h3>上肢力量</h3>
+								<img src="images/push-up.png" />
+								<div class="top-result-box">
+									<div class="top-result">
+										<p>
+											评价
+										</p><br/>
+										<strong>
+										健康
+									</strong>
+									</div>
+									<div class="top-result">
+										<p>
+											测试结果
+										</p><br/>
+										<strong>
+										<span>22</span>次
+									</strong>
+									</div>
+									<div class="top-result">
+										<p>
+											时间
+										</p><br/>
+										<strong>
+										22s
+									</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="bg-border"></div>
+						<div class="upper-score-bar">
+							<div class="score-bar-title-box">
+								<div class="score-bar-title">
+									<p>俯卧撑 （次）</p>
+								</div>
+							</div>
+							<div class="score-bar-box">
+								<div class="bar-title">
+									<p>需努力</p>
+									<p>健康区域</p>
+								</div>
+								<div class="score-bar">
+									<div class="score-bar-bar" style="width: 2rem;"></div>
+									<span>&nbsp;5次</span>
+								</div>
+							</div>
+						</div>
+						<div class="bg-border"></div>
+						<div class="upper-analysis">
+							<div class="upper-score-bar">
+								<div class="score-bar-title-box">
+									<div class="score-bar-title">
+										<p>分析结果</p>
+									</div>
+								</div>
+								<div class="score-bar-box" style="padding-top:0.2rem ;">
+									<div class="top-result" style="width: 3rem;">
+										<p>
+											平均频率
+										</p><br/>
+										<span>
+										0.5次/s
+									</span>
+									</div>
+									<div class="top-result" style="width: 3rem;">
+										<p>
+											方差
+										</p><br/>
+										<span>
+										1.23
+									</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="upper-body-strength-box">
+						<div class="upper-top">
+							<div class="top-box">
+								
+								<h3>柔韧性</h3>
+								<img src="images/sit-reach.png.png" />
+								<div class="top-result-box">
+									<div class="top-result" style="width: 3rem;">
+										<p>
+											评价
+										</p><br/>
+										<strong>
+										需努力
+									</strong>
+									</div>
+									<div class="top-result" style="width: 3rem;">
+										<p>
+											测试结果
+										</p><br/>
+										<strong>
+										<span>22</span>次
+									</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="bg-border"></div>
+						<div class="upper-score-bar">
+							<div class="score-bar-title-box">
+								<div class="score-bar-title">
+									<p>坐位体前屈 （cm）</p>
+								</div>
+							</div>
+							<div class="score-bar-box">
+								<div class="bar-title">
+									<p>需努力</p>
+									<p>健康区域</p>
+								</div>
+								<div class="score-bar">
+									<div class="score-bar-bar" style="width: 5rem;"></div>
+									<span>&nbsp;5cm</span>
+								</div>
+							</div>
+						</div>
+						<div class="bg-border" style="height: 4rem;"></div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="achievement-box">
+						<div class="score-bar-title-box">
+							<div class="score-bar-title">
+								<p>我的成就</p>
+							</div>
+						</div>
+						<div class="score-bar-box">
+							<div class="achievement-item">
+								<img src="images/Seaman.png" />
+								<div>
+									<h3>大力水手</h3>
+									<strong>次数超过10次</strong>
+									<p>俯卧撑<span>12</span>次</p>
+								</div>
+							</div>
+							<div class="achievement-item">
+								<img src="images/rocket.png" />
+								<div>
+									<h3>动力火箭</h3>
+									<strong>平均频率超过1次/s</strong>
+									<p>俯卧撑频率<span>12</span>次/s</p>
+								</div>
+							</div>
+							<div class="achievement-item">
+								<img src="images/master.png" />
+								<div>
+									<h3>稳定大师</h3>
+									<strong>平均频率超过1次/s</strong>
+									<p>俯卧撑频率<span>12</span>次/s</p>
+								</div>
+							</div>
+
+							<div class="achievement-item">
+								<img src="images/dancer.png" />
+								<div>
+									<h3>小小舞蹈家</h3>
+									<strong>有效距离大于5cm</strong>
+									<p>坐位体前屈<span>12</span>cm</p>
+								</div>
+							</div>
+							<div class="achievement-item">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="achievement-box">
+						<div class="score-bar-title-box">
+							<div class="score-bar-title">
+								<p>我的成就</p>
+							</div>
+						</div>
+						<div class="score-bar-box">
+							<img class="achievement-Succes-img" src="images/very-good.png">
+							<div class="achievement-Succes">
+								<strong>顺利完成！</strong>
+								<p>已成功完成<span>2</span>项测试</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script>
+		(function(doc, win) {
+			var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function() {
+					var clientWidth = docEl.clientWidth;
+					if(!clientWidth) return;
+					if(clientWidth >= 750) {
+						docEl.style.fontSize = '100px';
+					} else {
+						docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+					}
+				};
+			if(!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+
+		$(document).ready(function() {
+			var itemKdgInfo = [];
+			var template = Handlebars.compile($("#content-html").html());
+			var htmlText = template(itemKdgInfo);
+			$("#content").append(htmlText);
+			var swiper = new Swiper('.swiper-container', {
+				direction: 'vertical'
+			});
+		})
+	</script>
+
+	<body id="content">
+
+	</body>
+
+</html>
